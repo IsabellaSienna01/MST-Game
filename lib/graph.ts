@@ -32,6 +32,29 @@ export function sampleWeight(
   return total;
 }
 
+export function buildEdgeList(
+  nodes: Node[],
+  grid: Uint8Array,
+  cellW: number,
+  cellH: number
+): Edge[] {
+  const edges: Edge[] = [];
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      edges.push({
+        u: i,
+        v: j,
+        weight: sampleWeight(
+          grid,
+          nodes[i].x, nodes[i].y,
+          nodes[j].x, nodes[j].y,
+          cellW, cellH
+        ),
+      });
+    }
+  }
+  return edges;
+}
 
 export function getEdgeMidpointTerrain(
   grid: Uint8Array,

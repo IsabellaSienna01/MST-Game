@@ -1,4 +1,6 @@
 export type TerrainType = 'plains' | 'forest' | 'mud' | 'lake';
+export type AppMode = 'sandbox' | 'game';
+export type Algorithm = 'prim' | 'kruskal';
 export type GamePhase = 'building' | 'submitted';
 
 export interface Node {
@@ -31,10 +33,26 @@ export interface GameResult {
   missingConnections: boolean;
 }
 
+export interface SandboxState {
+  algorithm: Algorithm;
+  mstEdges: Edge[];
+  primCost: number | null;
+  kruskalCost: number | null;
+}
+
 export interface GameState {
   phase: GamePhase;
   playerEdges: Edge[];
   selectedNode: number | null;
   result: GameResult | null;
   seed: number;
+}
+
+export interface AnimationStep {
+  type: string;
+  edges: Edge[];
+  tried?: Edge;
+  accepted?: boolean;
+  activeNode?: number;
+  desc: string;
 }
